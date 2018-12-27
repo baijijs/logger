@@ -10,7 +10,6 @@ const { accessLogger, error, info, debug } = baijiLogger({
   baseDir: path.join(__dirname, './logs'),
 });
 
-
 const infoLogger = info();
 const errorLogger = error();
 const debugLogger = debug();
@@ -58,4 +57,4 @@ app.use(UsersCtrl);
 
 
 // Start app and listen on port 3000
-app.listen(3000, () => infoLogger.info('----- Port : 3000'));
+app.listen(3000, () => infoLogger.info('Port : 3000'));

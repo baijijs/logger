@@ -7,10 +7,12 @@ Menu
 <!-- TOC -->
 
 - [1. Installation](#1-installation)
-- [2. Description](#2-description)
-    - [2.1. 日志分级与回收](#21-日志分级与回收)
-- [3. Options](#3-options)
-- [4. TODO list](#4-todo-list)
+- [2. Use Case](#2-use-case)
+- [3. Description](#3-description)
+    - [3.1. classify & rotate](#31-classify--rotate)
+- [4. Options](#4-options)
+    - [4.1. `opton.filter`](#41-optonfilter)
+- [5. TODO list](#5-todo-list)
 
 <!-- /TOC -->
 
@@ -20,18 +22,69 @@ Menu
 yarn add baiji-logger
 # OR
 npm install baiji-logger -S
-
-# Use
-const baijiLogger = require('baiji-logger');
-
-const logger = baijiLogger();
 ```
 
-## 2. Description
+## 2. Use Case
+
+> See [./test/app/index.js](./test/app/index.js)
+
+```JavaScript
+// require
+const baiji = require('baiji');
+const path = require('path');
+const baijiLogger = require('baiji-logger');
+// define
+const { accessLogger, error, info, debug } = baijiLogger({
+  appkey: 'serviceName',
+  baseDir: path.join(__dirname, './logs'),
+});
+const infoLogger = info();
+const errorLogger = error();
+const debugLogger = debug();
+// use case
+const app = baiji('serviceName');
+
+class UsersCtrl extends baiji.Controller {
+  constructor() {
+    super();
+    // Use before actions
+    this.beforeAction('signInRequired');
+  }
+  initConfig() {
+    return {
+      search: {
+        description: 'Search users...',
+        route: { path: '/', verb: 'get' },
+      },
+    };
+  }
+  signInRequired(ctx, next) {
+    const token = ctx.req.get('authorization');
+    debugLogger.info(token);
+    debugLogger.error(token);
+    if (token) {
+      return next();
+    }
+    const err = new Error('Unauthorized');
+    ctx.status(401);
+    errorLogger.error(err);
+    return ctx.respond({ err });
+  }
+  search(ctx, next) {
+    return ctx.respond([{ username: 'serviceName', gender: 1 }], next);
+  }
+}
+app.use(accessLogger());
+app.use(UsersCtrl); // Use controller
+// Start app and listen on port 3000
+app.listen(3000, () => infoLogger.info('Port : 3000'));
+```
+
+## 3. Description
 
 Based on [winstonjs/winston][]
 
-### 2.1. classify & rotate
+### 3.1. classify & rotate
 
 | classify | instance     | env      | transport          | rotate          |
 | -------- | ------------ | -------- | ------------------ | --------------- |
@@ -45,7 +98,7 @@ Based on [winstonjs/winston][]
 
 - verbose and silly is not yet developed
 
-## 3. Options
+## 4. Options
 
 | param                              | type     | default                       | desc                                                                |
 | ---------------------------------- | -------- | ----------------------------- | ------------------------------------------------------------------- |
@@ -80,16 +133,16 @@ Based on [winstonjs/winston][]
 | `debugLoggerConfig.maxSize`        | string   | 10m                           |                                                                     |
 | `debugLoggerConfig.zippedArchive ` | boolean  | true                          |                                                                     |
 
-### `opton.filter`
+### 4.1. `opton.filter`
 
 ```JavaScript
 ```
 
-## 4. TODO list
+## 5. TODO list
 
-- [] Ensure number of file handles < 5
-- [] Filtering sensitive information
-- [] developing silly & verbose classify
+- [ ] Ensure number of file handles < 5
+- [ ] Filtering sensitive information
+- [ ] developing silly & verbose classify
 
 ---
 
