@@ -93,8 +93,6 @@ const debugLogger = (option) => {
       level,
       format: _.get(opt, 'format', customerFormat(appkey)),
       transports: _.get(opt, 'transports', [consoleTransport()]),
-      zippedArchive: _.get(opt, 'zippedArchive', true),
-      maxSize: _.get(opt, 'maxSize', '10m'),
     });
   };
 };
