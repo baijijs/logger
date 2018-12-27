@@ -1,0 +1,29 @@
+{
+  "name": "baiji-logger",
+  "version": "0.0.1",
+  "description": "the Logger Module for Baiji",
+  "main": "index.js",
+  "repository": "https://github.com/baijijs/logger",
+  "author": "occultskyrong@163.com",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "shortid": "^2.2.14",
+    "winston": "^3.1.0",
+    "winston-daily-rotate-file": "^3.5.1"
+  },
+  "devDependencies": {
+    "baiji": "^0.8.25",
+    "cz-conventional-changelog": "^2.1.0",
+    "jest": "^23.6.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon ./test/app/index.js",
+    "test": "jest"
+  }
+}
