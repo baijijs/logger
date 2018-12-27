@@ -40,8 +40,8 @@ class UsersCtrl extends baiji.Controller {
       return next();
     }
     const err = new Error('Unauthorized');
-    ctx.status(401);
     errorLogger.error(err);
+    ctx.status(401);
     return ctx.respond({ err });
   }
 
@@ -54,7 +54,6 @@ app.use(accessLogger());
 
 // Use controller
 app.use(UsersCtrl);
-
 
 // Start app and listen on port 3000
 app.listen(3000, () => infoLogger.info('Port : 3000'));
