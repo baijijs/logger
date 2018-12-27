@@ -71,46 +71,54 @@ Based on [winstonjs/winston][]
 
 ## 4. Options
 
+**Description**
+
+- | `option`          |
+- | -> `filter`       | means `option.filter`
+- | ---> `filterKeys` | means `options.filter.filterKeys`
+
+---
+
 | param                  | type            | default                                         | desc                                                                          |
 | ---------------------- | --------------- | ----------------------------------------------- | ----------------------------------------------------------------------------- |
 | `option`               | object          | -                                               | The option for baijiLogger                                                    |
-| ├──`appkey`            | string          | -                                               | The unique key for this app , be used for traceId                             |
-| ├──`baseDir`           | string          | -                                               | The base direction path for logs                                              |
-| ├──`filter`            | *               | -                                               | Sensitive information filtering and replace                                   |
-| │   ├──`filterKeys`    | array           | `['password', 'token', 'authorization']`        | Filter keys array list                                                        |
-| │   ├──`recursion`     | boolean         | `false`                                         | Is recursion , `{ password : { a: 1 } }` > `{ password : '*' }`               |
-| │   └──`replaceChat`   | string/function | `'*'`                                           | Replace chat or function                                                      |
-| ├──`generateTraceId`   | function        | `${timestamp}-${shortid}-${appKey}`             | The function for generate trace id                                            |
-| ├──`errorLoggerConfig` | object          | -                                               | The configuration for error logger                                            |
-| │   ├──`filepath`      | string          | `/${ENV}_${level}.log`                          | Used by path.join(baseDir,filepath)                                           |
-| │   ├──`format`        | function        | `[${timeFormat}] [${level}] ${label} - ${json}` | A string representing the [moment.js date format][] to be used for rotating.  |
-| │   ├──`level`         | string          | `error`                                         | Log only if info.level less than or equal to this level                       |
-| │   ├──`maxFiles`      | number          | `5`                                             | Maximum number of logs to keep.                                               |
-| │   ├──`maxSize`       | string          | `10m`                                           | Maximum size of the file after which it will rotate.                          |
-| │   ├──`transports`    | array           | `[ transports.Console , DailyRotateFile ]`      | [Winston Transports][]                                                        |
-| │   ├──`zippedArchive` | boolean         | `true`                                          | A boolean to define whether or not to gzip archived log files.                |
-| ├──`infoLoggerConfig`  | object          | -                                               | The configuration for info logger                                             |
-| │   ├──`datePattern`   | string          | `YYYY-MM-DD`                                    | ↑                                                                             |
-| │   ├──`filepath`      | string          | `/${level}/${ENV}_${level}_%DATE%.log`          | ↑                                                                             |
-| │   ├──`format`        | function        | `[${timeFormat}] [${level}] ${label} - ${json}` | ↑                                                                             |
-| │   ├──`level`         | string          | `info`                                          | ↑                                                                             |
-| │   ├──`maxFiles`      | string          | `7d`                                            | ↑                                                                             |
-| │   ├──`maxSize`       | string          | `10m`                                           | ↑                                                                             |
-| │   ├──`transports`    | array           | `[ transports.Console , DailyRotateFile ]`      | ↑                                                                             |
-| │   ├──`zippedArchive` | boolean         | `true`                                          | ↑                                                                             |
-| ├──`accessLogger`      | object          | -                                               | The configuration for access logger , when requested to get the corresponding |
-| │   ├──`body`          | string          | `ctx.req.body`                                  | Post method params                                                            |
-| │   ├──`method`        | string          | `ctx.req.method `                               | Http request method name                                                      |
-| │   ├──`query`         | string          | `ctx.req.query`                                 | Get method params                                                             |
-| │   ├──`remoteIP`      | string          | -                                               | Get remote ip even though proxy by nginx , see [common >> getIp function][]   |
-| │   ├──`statusCode`    | string          | `ctx.res.statusCode`                            | Http response statusCode                                                      |
-| │   ├──`traceId`       | string          | `${timestamp}-${shortid}`                       | Trace id of full process log                                                  |
-| │   ├──`url`           | string          | `ctx.req.originalUrl`                           | Http request url                                                              |
-| │   ├──`user`          | string          | `ctx.req.user`                                  | Remote user info                                                              |
-| ├──`debugLoggerConfig` | object          | -                                               | The configuration for debug logger                                            |
-| │   ├──`format`        | function        | `[${timeFormat}] [${level}] ${label} - ${json}` | ↑                                                                             |
-| │   ├──`level`         | string          | `debug`                                         | ↑                                                                             |
-| │   ├──`transports`    | array           | `[ transports.Console ]`                        | ↑                                                                             |
+| -> `appkey`            | string          | -                                               | The unique key for this app , be used for traceId                             |
+| -> `baseDir`           | string          | -                                               | The base direction path for logs                                              |
+| -> `filter`            | *               | -                                               | Sensitive information filtering and replace                                   |
+| ---> `filterKeys`      | array           | `['password', 'token', 'authorization']`        | Filter keys array list                                                        |
+| ---> `recursion`       | boolean         | `false`                                         | Is recursion , `{ password : { a: 1 } }` > `{ password : '*' }`               |
+| ---> `replaceChat`     | string/function | `'*'`                                           | Replace chat or function                                                      |
+| -> `generateTraceId`   | function        | `${timestamp}-${shortid}-${appKey}`             | The function for generate trace id                                            |
+| -> `errorLoggerConfig` | object          | -                                               | The configuration for error logger                                            |
+| ---> `filepath`        | string          | `/${ENV}_${level}.log`                          | Used by path.join(baseDir,filepath)                                           |
+| ---> `format`          | function        | `[${timeFormat}] [${level}] ${label} - ${json}` | A string representing the [moment.js date format][] to be used for rotating.  |
+| ---> `level`           | string          | `error`                                         | Log only if info.level less than or equal to this level                       |
+| ---> `maxFiles`        | number          | `5`                                             | Maximum number of logs to keep.                                               |
+| ---> `maxSize`         | string          | `10m`                                           | Maximum size of the file after which it will rotate.                          |
+| ---> `transports`      | array           | `[ transports.Console , DailyRotateFile ]`      | [Winston Transports][]                                                        |
+| ---> `zippedArchive`   | boolean         | `true`                                          | A boolean to define whether or not to gzip archived log files.                |
+| -> `infoLoggerConfig`  | object          | -                                               | The configuration for info logger                                             |
+| ---> `datePattern`     | string          | `YYYY-MM-DD`                                    | ↑                                                                             |
+| ---> `filepath`        | string          | `/${level}/${ENV}_${level}_%DATE%.log`          | ↑                                                                             |
+| ---> `format`          | function        | `[${timeFormat}] [${level}] ${label} - ${json}` | ↑                                                                             |
+| ---> `level`           | string          | `info`                                          | ↑                                                                             |
+| ---> `maxFiles`        | string          | `7d`                                            | ↑                                                                             |
+| ---> `maxSize`         | string          | `10m`                                           | ↑                                                                             |
+| ---> `transports`      | array           | `[ transports.Console , DailyRotateFile ]`      | ↑                                                                             |
+| ---> `zippedArchive`   | boolean         | `true`                                          | ↑                                                                             |
+| -> `accessLogger`      | object          | -                                               | The configuration for access logger , when requested to get the corresponding |
+| ---> `body`            | string          | `ctx.req.body`                                  | Post method params                                                            |
+| ---> `method`          | string          | `ctx.req.method`                                | Http request method name                                                      |
+| ---> `query`           | string          | `ctx.req.query`                                 | Get method params                                                             |
+| ---> `remoteIP`        | string          | -                                               | Get remote ip even though proxy by nginx , see [common >> getIp function][]   |
+| ---> `statusCode`      | string          | `ctx.res.statusCode`                            | Http response statusCode                                                      |
+| ---> `traceId`         | string          | `${timestamp}-${shortid}`                       | Trace id of full process log                                                  |
+| ---> `url`             | string          | `ctx.req.originalUrl`                           | Http request url                                                              |
+| ---> `user`            | string          | `ctx.req.user`                                  | Remote user info                                                              |
+| -> `debugLoggerConfig` | object          | -                                               | The configuration for debug logger                                            |
+| ---> `format`          | function        | `[${timeFormat}] [${level}] ${label} - ${json}` | ↑                                                                             |
+| ---> `level`           | string          | `debug`                                         | ↑                                                                             |
+| ---> `transports`      | array           | `[ transports.Console ]`                        | ↑                                                                             |
 
 ## 5. TODO list
 
