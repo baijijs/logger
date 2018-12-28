@@ -1,0 +1,34 @@
+# IDE
+.vscode
+
+# mac
+.DS_Store
+
+# logs
+logs
+*.log
+
+# .bak
+*.bak
+
+# node | npm | yarn
+node_modules
+npm-debug.log
+npm-lock.log
+package-lock.json
+yarn.lock
+
+# config|desc in development|test 
+docs
+test
+.eslintrc.json
+
+# temp file
+Thumbs.db
+db.json
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
+# logs
+logs/*
