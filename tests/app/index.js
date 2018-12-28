@@ -6,7 +6,7 @@ const path = require('path');
 const baijiLogger = require('../../index');
 
 const { accessLogger, error, info, debug } = baijiLogger({
-  appkey: 'nereusService',
+  appkey: 'serviceName',
   baseDir: path.join(__dirname, './logs'),
 });
 
@@ -14,7 +14,7 @@ const infoLogger = info();
 const errorLogger = error();
 const debugLogger = debug();
 
-const app = baiji('test');
+const app = baiji('serviceName');
 
 class UsersCtrl extends baiji.Controller {
   constructor() {
@@ -46,7 +46,7 @@ class UsersCtrl extends baiji.Controller {
   }
 
   search(ctx, next) {
-    return ctx.respond([{ username: 'bamaying', gender: 1 }], next);
+    return ctx.respond([{ username: 'serviceName', gender: 1 }], next);
   }
 }
 
