@@ -126,15 +126,15 @@ Based on [winstonjs/winston][]
 ### 4.1. Detail Case
 
 - `option.filter.recursion`
+  **not yet developed**.
   Is recursion. In case `{"body":{"password":{"a":1}}}` , if `true` will be `{"body":{"password":{"a":"*"}}}` ; else , will be `{"body":{"password":"*"}}` .
-  **not yet developed**
-
+  
 ## 5. TODO list
 
 - [ ] Ensure number of log file handles < 5
 - [ ] Developing `warning/silly/verbose` classify
-- [ ] Concurrency test
-- [ ] Improve the efficiency and concurrency of the `filter function`
+- [x] Concurrency test
+- [x] Improve the efficiency and concurrency of the `filter function`
 
 ## 6. Run Tests
 
