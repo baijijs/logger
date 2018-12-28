@@ -21,7 +21,7 @@ A logger compoment for Baiji
 
 ## 1. Installation
 
-`NodeJS version >= 8.9.0`
+`NodeJS version >= 8.12.0`
 
 ```shell
 yarn add baiji-logger
@@ -134,7 +134,8 @@ Based on [winstonjs/winston][]
 - [ ] Ensure number of log file handles < 5
 - [ ] Developing `warning/silly/verbose` classify
 - [x] Concurrency test
-- [x] Improve the efficiency and concurrency of the `filter function`
+- [ ] Improve the efficiency and concurrency of the `filter` function
+- [ ] Refactor the `filter` function
 
 ## 6. Run Tests
 
