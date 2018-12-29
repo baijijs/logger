@@ -29,8 +29,8 @@
   "name": "baiji-logger",
   "nodemonConfig": {
     "ignore": [
-      "tests/*",
-      "docs/*"
+      "docs/*",
+      "tests/*"
     ]
   },
   "repository": "https://github.com/baijijs/logger",
