@@ -32,7 +32,7 @@ const customerPrintf = printf((info) => {
   const formatMessage = typeof message === 'string' ? message : JSON.stringify(message);
   return `[${getNowFormat()}] [${info.level}] ${info.label} - ${formatMessage}`;
 });
-const customerFormat = appkey => combine(label({ label: appkey }), customerPrintf);
+const customerFormat = traceKey => combine(label({ label: traceKey }), customerPrintf);
 
 // console transport based on winston
 const consoleTransport = () => new transports.Console();
@@ -58,14 +58,14 @@ const dailyRotateFileTransport = opt => new DailyRotateFile(opt);
  * @param {object} option config option
  */
 const errorLogger = (option) => {
-  const { appkey, baseDir, errorLoggerConfig } = option;
+  const { traceKey, baseDir, errorLoggerConfig } = option;
   return (opt = {}) => {
     Object.assign(opt, errorLoggerConfig);
     const level = _.get(opt, 'level', 'error');
     const filepath = _.get(opt, 'filepath', `/${ENV}_${level}.log`);
     return createLogger({
       level,
-      format: _.get(opt, 'format', customerFormat(appkey)),
+      format: _.get(opt, 'format', customerFormat(traceKey)),
       transports: _.get(opt, 'transports', [
         consoleTransport(),
         fileTransport({
@@ -85,13 +85,13 @@ const errorLogger = (option) => {
  * @param {object} option config option
  */
 const debugLogger = (option) => {
-  const { appkey, errorLoggerConfig } = option;
+  const { traceKey, errorLoggerConfig } = option;
   return (opt = {}) => {
     Object.assign(opt, errorLoggerConfig);
     const level = _.get(opt, 'level', 'debug');
     return createLogger({
       level,
-      format: _.get(opt, 'format', customerFormat(appkey)),
+      format: _.get(opt, 'format', customerFormat(traceKey)),
       transports: _.get(opt, 'transports', [consoleTransport()]),
     });
   };
@@ -102,14 +102,14 @@ const debugLogger = (option) => {
  * @param {object} option config option
  */
 const infoLogger = (option) => {
-  const { appkey, baseDir, infoLoggerConfig } = option;
+  const { traceKey, baseDir, infoLoggerConfig } = option;
   return (opt = {}) => {
     Object.assign(opt, infoLoggerConfig);
     const level = _.get(opt, 'level', 'info');
     const filepath = _.get(opt, 'filepath', `/${level}/${ENV}_${level}_%DATE%.log`);
     return createLogger({
       level,
-      format: _.get(opt, 'format', customerFormat(appkey)),
+      format: _.get(opt, 'format', customerFormat(traceKey)),
       transports: _.get(opt, 'transports', [
         consoleTransport(),
         dailyRotateFileTransport({
@@ -129,7 +129,7 @@ const infoLogger = (option) => {
  * @param {object} option config option
  */
 const accessLogger = (option) => {
-  const { appkey } = option;
+  const { traceKey } = option;
   const infoLoggerInstance = infoLogger(option);
   return (opt) => {
     const logger = infoLoggerInstance({
@@ -148,17 +148,8 @@ const accessLogger = (option) => {
       user: 'req.user',
       userAgent: 'req.userAgent',
     }, opt);
-    return (...args) => {
-      const { length } = args;
-      const next = args[length - 1];
-      let ctx;
-      if (length === 2) {
-        [ctx] = args;
-      } else if (length === 3) {
-        ctx = { req: args[0], res: args[1] };
-      } else {
-        console.error(new Error('Arguments.length !== 2 OR 3 , Just like (context,next) OR (request,response,next)'));
-      }
+    return (req, res, next) => {
+      const ctx = { req, res };
       /**
        * The process.hrtime() method returns the current high-resolution real time in a [seconds, nanoseconds] tuple Array,
        * where nanoseconds is the remaining part of the real time that can't be represented in second precision.
@@ -166,9 +157,9 @@ const accessLogger = (option) => {
        */
       const startedAt = process.hrtime(); // 获取高精度时间
       const remoteIP = _.get(ctx, aco.remoteIP);
-      const traceId = `${_.get(ctx, aco.traceId, _.get(option, 'generateTraceId', generateTraceId)())}-${appkey}`;
+      const traceId = `${_.get(ctx, aco.traceId, _.get(option, 'generateTraceId', generateTraceId)())}-${traceKey}`;
       const log = {
-        appkey,
+        'trace-key': traceKey,
         body: _.get(ctx, aco.body, {}),
         method: _.get(ctx, aco.method, 'GET'),
         query: _.get(ctx, aco.query, {}),
