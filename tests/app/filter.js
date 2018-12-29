@@ -12,10 +12,10 @@ const APP_KEY = 'filterService';
 const PORT = 3000;
 
 const { accessLogger, info, debug } = baijiLogger({
-  appkey: APP_KEY,
+  traceKey: APP_KEY,
   baseDir: path.join(__dirname, './logs'),
   filter: {
-    filterKeys: ['password'],
+    filterKeys: ['password', 'token'],
     replaceChat: '*',
   },
 });
@@ -35,7 +35,8 @@ class UsersCtrl extends baiji.Controller {
     };
   }
   filter(ctx, next) {
-    debugLogger.debug('test for debug');
+    const { req: { body } } = ctx;
+    debugLogger.debug(`req.body:${JSON.stringify(body)}`);
     return ctx.respond({ data: true, message: 'OK' }, next);
   }
 }

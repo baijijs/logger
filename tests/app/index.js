@@ -11,7 +11,7 @@ const {
   info,
   debug,
 } = baijiLogger({
-  appkey: 'serviceName',
+  traceKey: 'serviceName',
   baseDir: path.join(__dirname, './logs'),
 });
 

@@ -17,4 +17,15 @@ println(' <---  CPUs Info - begin  --->\n');
 println(os.cpus());
 println('\n <---  CPUs Info - end --->');
 
-require('./filter');
+const filter = require('./filter');
+const requestFilter = require('./request-filter');
+
+async function run() {
+  await filter();
+  await requestFilter();
+}
+
+run()
+  .then(() => console.info('--- √ Benchmark Completed √ ---'))
+  .catch(console.error)
+  .then(() => process.exit(0));

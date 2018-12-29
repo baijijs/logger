@@ -12,7 +12,7 @@ const APP_KEY = 'filterService';
 const PORT = 3001;
 
 const { accessLogger, info, debug } = baijiLogger({
-  appkey: APP_KEY,
+  traceKey: APP_KEY,
   baseDir: path.join(__dirname, './logs'),
   filter: false,
 });

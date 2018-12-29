@@ -11,7 +11,7 @@ const suite = new Benchmark.Suite();
 // test case
 
 const message = {
-  appkey: 'serviceName',
+  traceKey: 'serviceName',
   body: { password: '123456', token: 'abcdefghijklmn' },
   body1: { password: { original: '123456', change: '123456789' } },
   method: 'GET',
@@ -28,17 +28,22 @@ const message = {
   status: 404,
 };
 
-println(' <--- Test benchmark of filter - begin ---> \n');
-suite
-  .add('"filter password recursion:false"', () => {
-    filteringSensitiveInfo(message, { recursion: false });
-  })
-  // .add('"filter password recursion:true"', () => {
-  //   filteringSensitiveInfo(message, { recursion: true });
-  // })
-  .on('cycle', event => println(String(event.target)))
-  .on('complete', function completeCallback() {
-    println(`Fastest is "${this.filter('fastest').map('name')}"`);
-    println('\n <---  Test benchmark of filter - end ---> ');
-  })
-  .run({ async: true });
+const run = () => new Promise((resolve) => {
+  println(' <--- Test benchmark of filter - begin ---> \n');
+  suite
+    .add('"filter password recursion:false"', () => {
+      filteringSensitiveInfo(message, { recursion: false });
+    })
+    // .add('"filter password recursion:true"', () => {
+    //   filteringSensitiveInfo(message, { recursion: true });
+    // })
+    .on('cycle', event => println(String(event.target)))
+    .on('complete', function completeCallback() {
+      println(`Fastest is ${this.filter('fastest').map('name')}`);
+      println('\n <---  Test benchmark of filter - end ---> ');
+      resolve();
+    })
+    .run({ async: true });
+});
+
+module.exports = run;
