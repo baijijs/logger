@@ -40,7 +40,7 @@ const path = require('path');
 const baijiLogger = require('baiji-logger');
 // define
 const { accessLogger, error, info, debug } = baijiLogger({
-  appkey: 'serviceName',
+  traceKey: 'serviceName',
   baseDir: path.join(__dirname, './logs'),
 });
 const infoLogger = info();
@@ -85,13 +85,13 @@ Based on [winstonjs/winston][]
 | param                | type            | default                                         | desc                                                                          |
 | -------------------- | --------------- | ----------------------------------------------- | ----------------------------------------------------------------------------- |
 | `option`             | object          | -                                               | The option for baijiLogger                                                    |
-| `.appkey`            | string          | -                                               | The unique key for this app , be used for traceId                             |
+| `.traceKey`          | string          | -                                               | The unique key for this app , be used for traceId                             |
 | `.baseDir`           | string          | -                                               | The base direction path for logs                                              |
 | `.filter`            | *               | `false`                                         | Sensitive information filtering and replace                                   |
 | `-filterKeys`        | array           | `['password', 'token', 'authorization']`        | Filter keys array list                                                        |
 | `-recursion`         | boolean         | `false`                                         | Is recursion                                                                  |
 | `-replaceChat`       | string/function | `'*'`                                           | Replace chat or function                                                      |
-| `.generateTraceId`   | function        | `${timestamp}-${shortid}-${appKey}`             | The function for generate trace id                                            |
+| `.generateTraceId`   | function        | `${timestamp}-${shortid}-${traceKey}`           | The function for generate trace id                                            |
 | `.errorLoggerConfig` | object          | -                                               | The configuration for error logger                                            |
 | `-filepath`          | string          | `/${ENV}_${level}.log`                          | Used by path.join(baseDir,filepath)                                           |
 | `-format`            | function        | `[${timeFormat}] [${level}] ${label} - ${json}` | A string representing the [moment.js date format][] to be used for rotating.  |
@@ -128,6 +128,9 @@ Based on [winstonjs/winston][]
 - `option.filter.recursion`
   **not yet developed**.
   Is recursion. In case `{"body":{"password":{"a":1}}}` , if `true` will be `{"body":{"password":{"a":"*"}}}` ; else , will be `{"body":{"password":"*"}}` .
+- `option.filter.replaceChat`
+  **not yet developed**.
+  only support String type.
   
 ## 5. TODO list
 
