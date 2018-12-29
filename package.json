@@ -20,20 +20,26 @@
     "baiji": "^0.8.25",
     "benchmark": "^2.1.4",
     "cz-conventional-changelog": "^2.1.0",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
   },
   "homepage": "https://github.com/baijijs/logger#readme",
   "main": "index.js",
   "name": "baiji-logger",
   "nodemonConfig": {
-    "ignore": ["tests/*", "docs/*"]
+    "ignore": [
+      "tests/*",
+      "docs/*"
+    ]
   },
   "repository": "https://github.com/baijijs/logger",
   "scripts": {
     "dev": "NODE_ENV=development nodemon ./tests/app/index.js",
+    "dev-filter": "NODE_ENV=development nodemon ./tests/app/filter.js",
+    "dev-filter-false": "NODE_ENV=development nodemon ./tests/app/filter-false.js",
     "test": "jest",
-    "benchmark": "node ./tests/benchmark-test.js"
+    "benchmark": "node ./tests/benchmark/index.js"
   },
   "version": "0.0.1"
-
 }
