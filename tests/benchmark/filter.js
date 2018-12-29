@@ -2,24 +2,11 @@
  * Use benchmarks for concurrent performance tests
  */
 const Benchmark = require('benchmark');
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
 
-const { filteringSensitiveInfo } = require('../lib/filter');
+const { filteringSensitiveInfo } = require('../../lib/filter');
+const { println } = require('./common');
 
 const suite = new Benchmark.Suite();
-
-const filePath = path.join(__dirname, '../docs/benchmark.report.log');
-
-const println = (message) => {
-  console.info(message);
-  fs.appendFileSync(filePath, `${typeof message === 'string' ? message : JSON.stringify(message)}\n`);
-};
-
-fs.unlinkSync(filePath);
-println(' --- CPUs ---');
-println(os.cpus());
 
 // test case
 
@@ -41,15 +28,17 @@ const message = {
   status: 404,
 };
 
+println(' <--- Test benchmark of filter - begin ---> \n');
 suite
-  .add('[filter password recursion:false]', () => {
+  .add('"filter password recursion:false"', () => {
     filteringSensitiveInfo(message, { recursion: false });
   })
-  // .add('[filter password recursion:true]', () => {
+  // .add('"filter password recursion:true"', () => {
   //   filteringSensitiveInfo(message, { recursion: true });
   // })
   .on('cycle', event => println(String(event.target)))
   .on('complete', function completeCallback() {
-    println(`Fastest is [${this.filter('fastest').map('name')}]`);
+    println(`Fastest is "${this.filter('fastest').map('name')}"`);
+    println('\n <---  Test benchmark of filter - end ---> ');
   })
   .run({ async: true });

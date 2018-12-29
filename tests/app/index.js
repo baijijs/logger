@@ -5,7 +5,12 @@ const path = require('path');
 
 const baijiLogger = require('../../index');
 
-const { accessLogger, error, info, debug } = baijiLogger({
+const {
+  accessLogger,
+  error,
+  info,
+  debug,
+} = baijiLogger({
   appkey: 'serviceName',
   baseDir: path.join(__dirname, './logs'),
 });
@@ -22,18 +27,21 @@ class UsersCtrl extends baiji.Controller {
     // Use before actions
     this.beforeAction('signInRequired');
   }
-
   initConfig() {
     return {
       search: {
         description: 'Search users...',
-        route: { path: '/', verb: 'get' },
+        route: {
+          path: '/',
+          verb: 'get',
+        },
       },
     };
   }
-
   signInRequired(ctx, next) {
-    const token = ctx.req.get('authorization');
+    const token = ctx
+      .req
+      .get('authorization');
     debugLogger.info(token);
     debugLogger.error(token);
     if (token) {
@@ -44,9 +52,11 @@ class UsersCtrl extends baiji.Controller {
     ctx.status(401);
     return ctx.respond({ err });
   }
-
   search(ctx, next) {
-    return ctx.respond([{ username: 'serviceName', gender: 1 }], next);
+    return ctx.respond([{
+      username: 'serviceName',
+      gender: 1,
+    }], next);
   }
 }
 
