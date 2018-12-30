@@ -4,7 +4,7 @@ A logger compoment for Baiji
 
 # Menu
 
-<!-- TOC -->
+<!-- TOC depthFrom:2 -->
 
 - [1. Installation](#1-installation)
 - [2. Usage](#2-usage)
@@ -56,7 +56,7 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
 
 ## 3. Description
 
-Based on [winstonjs/winston][]
+> Based on [winstonjs/winston][]
 
 ### 3.1. classify & rotate
 
@@ -113,7 +113,7 @@ Based on [winstonjs/winston][]
 | `-body`              | string          | `ctx.req.body`                                  | Post method params                                                            |
 | `-method`            | string          | `ctx.req.method`                                | Http request method name                                                      |
 | `-query`             | string          | `ctx.req.query`                                 | Get method params                                                             |
-| `-remoteIP`          | string          | -                                               | Get remote ip even though proxy by nginx , see [common >> getIp function][]   |
+| `-remoteIP`          | string          | -                                               | Get remote ip even though proxy by nginx , see [common >> getIP function][]   |
 | `-statusCode`        | string          | `ctx.res.statusCode`                            | Http response statusCode                                                      |
 | `-traceId`           | string          | `${timestamp}-${shortid}`                       | Trace id of full process log                                                  |
 | `-url`               | string          | `ctx.req.originalUrl`                           | Http request url                                                              |
@@ -156,7 +156,7 @@ yarn test
 
 Benchmark report log out to `./docs/benchmark.report.log` .
 
-> [bestiejs/benchmark.js][]
+> Based on [bestiejs/benchmark.js][]
 
 ```shell
 npm run benchmark
@@ -168,4 +168,4 @@ npm run benchmark
 [Winston Transports]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#winston-core
 [bestiejs/benchmark.js]: https://github.com/bestiejs/benchmark.js
 [moment.js date format]: http://momentjs.com/docs/#/displaying/format/
-[common >> getIp function]: ./lib/common.js
+[common >> getIP function]: ./lib/common.js
