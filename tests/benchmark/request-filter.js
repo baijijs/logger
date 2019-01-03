@@ -40,7 +40,7 @@ const run = () => new Promise((resolve) => {
     .add(`"request filter:false defer:true send:${JSON.stringify(data2)}"`, send2(data2), { defer: true })
     .on('cycle', event => println(String(event.target)))
     .on('complete', function completeCallback() {
-      println(`Fastest is "${this.filter('fastest').map('name')}"`);
+      println(`Fastest is ${this.filter('fastest').map('name')}`);
       println('\n <---  Test benchmark of request filter - end ---> ');
       resolve();
     })
