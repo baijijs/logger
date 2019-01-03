@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { version } = require('../../package.json');
-const filePath = path.join(__dirname, `../../docs/report/filter.benchmark.${version}.log`);
+const filePath = path.join(__dirname, `../../docs/report/filter.benchmark.${version}.report`);
 
 const println = (message) => {
   console.info(message);
