@@ -158,11 +158,11 @@ const accessLogger = (option) => {
       const startedAt = process.hrtime(); // 获取高精度时间
       const remoteIP = _.get(ctx, aco.remoteIP);
       const traceId = `${_.get(ctx, aco.traceId, _.get(option, 'generateTraceId', generateTraceId)())}-${traceKey}`;
+      const method = _.get(ctx, aco.method, 'GET').toUpperCase();
       const log = {
         'trace-key': traceKey,
-        body: _.get(ctx, aco.body, {}),
-        method: _.get(ctx, aco.method, 'GET'),
-        query: _.get(ctx, aco.query, {}),
+        method,
+        params: Object.assign({}, _.get(ctx, aco.query, {}), _.get(ctx, aco.body, {})), // assign query and body params
         'remote-addr': remoteIP ? getIP(remoteIP) : '0.0.0.0',
         'requested-at': getNowFormat(),
         'requested-timestamp': _.now(),
