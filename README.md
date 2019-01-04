@@ -142,6 +142,12 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
 
 ## 6. Run Tests
 
+Install development environment module .
+
+```shell
+yarn install -D
+```
+
 ### 6.1. Unit Test
 
 All of the logger test cases are written with `Jest`. They can be run with `npm` or `yarn`.
@@ -159,6 +165,8 @@ Benchmark report log out to `./docs/benchmark.report.log` .
 > Based on [bestiejs/benchmark.js][]
 
 ```shell
+npm run dev-filter
+npm run dev-filter-false
 npm run benchmark
 ```
 
