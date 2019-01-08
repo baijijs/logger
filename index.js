@@ -178,7 +178,7 @@ const accessLogger = (option) => {
         'requested-at': getNowFormat(),
         'requested-timestamp': _.now(),
         'trace-id': traceId,
-        url: _.get(ctx, aco.url, '/'),
+        url: decodeURI(_.get(ctx, aco.url, '/')),
         'remote-user': _.get(ctx, aco.user, {}),
         'user-agent': _.get(ctx, aco.userAgent, ''),
       };
