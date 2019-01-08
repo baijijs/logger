@@ -148,7 +148,18 @@ const accessLogger = (option) => {
       user: 'req.user',
       userAgent: 'req.userAgent',
     }, opt);
-    return (req, res, next) => {
+    return (...args) => {
+      let req;
+      let res;
+      let next;
+      if (args.length === 3) {
+        [req, res, next] = args;
+      } else if (args.length === 2) {
+        [{ req, res }, next] = args;
+      } else {
+        console.error(new Error('Access logger only support 2 or 3 arguments'));
+        return;
+      }
       const ctx = { req, res };
       /**
        * The process.hrtime() method returns the current high-resolution real time in a [seconds, nanoseconds] tuple Array,
