@@ -20,17 +20,30 @@ const messageOriginal = {
 };
 
 const messageResult = {
-  body: { password: '******', token: '**************' },
-  body1: { password: { original: '******', change: '*********' } },
+  body: { password: '*', token: '*' },
+  body1: { password: '*' },
 };
+
+// addTestCase({ password: 1 }, { filterKeys: ['password'], recursion: false }, { password: '*' });
+// addTestCase({ password: 12 }, { filterKeys: ['password'], recursion: false }, { password: '**' });
+// addTestCase({ password: '1' }, { filterKeys: ['password'], recursion: false }, { password: '*' });
+// addTestCase({ password: '12' }, { filterKeys: ['password'], recursion: false }, { password: '**' });
+// addTestCase({ password: [1, 2, 3] }, { filterKeys: ['password'], recursion: false }, { password: ['*', '*', '*'] });
+// addTestCase({ password: { a: 1 } }, { filterKeys: ['password'], recursion: false }, { password: { a: '*' } });
+// addTestCase({ password: { a: 12 } }, { filterKeys: ['password'], recursion: false }, { password: { a: '**' } });
+// addTestCase({ password: { a: '1' } }, { filterKeys: ['password'], recursion: false }, { password: { a: '*' } });
+// addTestCase({ password: { a: 'abc' } }, { filterKeys: ['password'], recursion: false }, { password: { a: '***' } });
+// addTestCase({ password: { a: { b: 1 } } }, { filterKeys: ['password'], recursion: false }, { password: { a: { b: '*' } } });
+// addTestCase(messageOriginal, { filterKeys: ['password', 'token'], recursion: false }, messageResult);
+
 addTestCase({ password: 1 }, { filterKeys: ['password'], recursion: false }, { password: '*' });
-addTestCase({ password: 12 }, { filterKeys: ['password'], recursion: false }, { password: '**' });
+addTestCase({ password: 12 }, { filterKeys: ['password'], recursion: false }, { password: '*' });
 addTestCase({ password: '1' }, { filterKeys: ['password'], recursion: false }, { password: '*' });
-addTestCase({ password: '12' }, { filterKeys: ['password'], recursion: false }, { password: '**' });
-addTestCase({ password: [1, 2, 3] }, { filterKeys: ['password'], recursion: false }, { password: ['*', '*', '*'] });
-addTestCase({ password: { a: 1 } }, { filterKeys: ['password'], recursion: false }, { password: { a: '*' } });
-addTestCase({ password: { a: 12 } }, { filterKeys: ['password'], recursion: false }, { password: { a: '**' } });
-addTestCase({ password: { a: '1' } }, { filterKeys: ['password'], recursion: false }, { password: { a: '*' } });
-addTestCase({ password: { a: 'abc' } }, { filterKeys: ['password'], recursion: false }, { password: { a: '***' } });
-addTestCase({ password: { a: { b: 1 } } }, { filterKeys: ['password'], recursion: false }, { password: { a: { b: '*' } } });
+addTestCase({ password: '12' }, { filterKeys: ['password'], recursion: false }, { password: '*' });
+addTestCase({ password: [1, 2, 3] }, { filterKeys: ['password'], recursion: false }, { password: '*' });
+addTestCase({ password: { a: 1 } }, { filterKeys: ['password'], recursion: false }, { password: '*' });
+addTestCase({ password: { a: 12 } }, { filterKeys: ['password'], recursion: false }, { password: '*' });
+addTestCase({ password: { a: '1' } }, { filterKeys: ['password'], recursion: false }, { password: '*' });
+addTestCase({ password: { a: 'abc' } }, { filterKeys: ['password'], recursion: false }, { password: '*' });
+addTestCase({ password: { a: { b: 1 } } }, { filterKeys: ['password'], recursion: false }, { password: '*' });
 addTestCase(messageOriginal, { filterKeys: ['password', 'token'], recursion: false }, messageResult);

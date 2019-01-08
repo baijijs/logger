@@ -13,9 +13,10 @@ A logger compoment for Baiji
 - [4. Options](#4-options)
     - [4.1. Detail Case](#41-detail-case)
 - [5. TODO list](#5-todo-list)
-- [6. Run Tests](#6-run-tests)
-    - [6.1. Unit Test](#61-unit-test)
-    - [6.2. Benchmark Test](#62-benchmark-test)
+- [6. Contribution Step](#6-contribution-step)
+- [7. Run Tests](#7-run-tests)
+    - [7.1. Unit Test](#71-unit-test)
+    - [7.2. Benchmark Test](#72-benchmark-test)
 
 <!-- /TOC -->
 
@@ -140,7 +141,22 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
 - [ ] Improve the efficiency and concurrency of the `filter` function
 - [ ] Refactor the `filter` function
 
-## 6. Run Tests
+## 6. Contribution Step
+
+```shell
+fork https://github.com/baijijs/logger.git
+git clone <your own repository>
+git branches <your own branch>
+git checkout <your own branch>
+yarn install -D
+... something change
+git cz
+... step by step add commit with message
+git push
+pull request
+```
+
+## 7. Run Tests
 
 Install development environment module .
 
@@ -148,7 +164,7 @@ Install development environment module .
 yarn install -D
 ```
 
-### 6.1. Unit Test
+### 7.1. Unit Test
 
 All of the logger test cases are written with `Jest`. They can be run with `npm` or `yarn`.
 
@@ -158,7 +174,7 @@ npm test
 yarn test
 ```
 
-### 6.2. Benchmark Test
+### 7.2. Benchmark Test
 
 Benchmark report log out to `./docs/benchmark.report.log` .
 
