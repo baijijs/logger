@@ -178,7 +178,7 @@ const accessLogger = (option) => {
         'requested-at': getNowFormat(),
         'requested-timestamp': _.now(),
         'trace-id': traceId,
-        url: _.get(ctx, aco.url, '/'),
+        url: decodeURI(_.get(ctx, aco.url, '/')),
         'remote-user': _.get(ctx, aco.user, {}),
         'user-agent': _.get(ctx, aco.userAgent, ''),
       };
@@ -206,13 +206,11 @@ const accessLogger = (option) => {
  * Init baijiLogger
  * @see README.md for option description
  */
-const baijiLogger = (option) => {
-  return {
-    accessLogger: accessLogger(option),
-    error: errorLogger(option),
-    debug: debugLogger(option),
-    info: infoLogger(option),
-  };
-};
+const baijiLogger = option => ({
+  accessLogger: accessLogger(option),
+  error: errorLogger(option),
+  debug: debugLogger(option),
+  info: infoLogger(option),
+});
 
 module.exports = baijiLogger;

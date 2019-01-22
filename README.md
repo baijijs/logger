@@ -135,11 +135,16 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
   
 ## 5. TODO list
 
+### 5.1. Features
+
 - [ ] Ensure number of log file handles < 5
 - [ ] Developing `warning/silly/verbose` classify
 - [x] Concurrency test
 - [ ] Improve the efficiency and concurrency of the `filter` function
-- [ ] Refactor the `filter` function
+- [ ] Add `stringify` option field to use JSON.stringify(message) ; before this , judge params typeof
+- [ ] Update `Options` description
+- [ ] Add `Kafka` transport config
+- [ ] Add `error email` config
 
 ## 6. Contribution Step
 
