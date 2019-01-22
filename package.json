@@ -9,7 +9,6 @@
     }
   },
   "dependencies": {
-    "license": "MIT",
     "lodash": "^4.17.11",
     "shortid": "^2.2.14",
     "winston": "^3.1.0",
