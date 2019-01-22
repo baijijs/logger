@@ -206,13 +206,11 @@ const accessLogger = (option) => {
  * Init baijiLogger
  * @see README.md for option description
  */
-const baijiLogger = (option) => {
-  return {
-    accessLogger: accessLogger(option),
-    error: errorLogger(option),
-    debug: debugLogger(option),
-    info: infoLogger(option),
-  };
-};
+const baijiLogger = option => ({
+  accessLogger: accessLogger(option),
+  error: errorLogger(option),
+  debug: debugLogger(option),
+  info: infoLogger(option),
+});
 
 module.exports = baijiLogger;
