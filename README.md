@@ -145,6 +145,7 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
 - [ ] Update `Options` description
 - [ ] Add `Kafka` transport config
 - [ ] Add `error email` config
+- [ ] Update `trace-id` of `req` , add the `key` of this app
 
 ## 6. Contribution Step
 

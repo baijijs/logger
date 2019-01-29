@@ -1,0 +1,20 @@
+ <---  CPUs Info - begin  --->
+
+[{"model":"Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz","speed":2700,"times":{"user":3623760,"nice":0,"sys":2863650,"idle":19301950,"irq":0}},{"model":"Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz","speed":2700,"times":{"user":1873700,"nice":0,"sys":1288150,"idle":22626930,"irq":0}},{"model":"Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz","speed":2700,"times":{"user":3507150,"nice":0,"sys":2484010,"idle":19797620,"irq":0}},{"model":"Intel(R) Core(TM) i5-5257U CPU @ 2.70GHz","speed":2700,"times":{"user":1866310,"nice":0,"sys":1250320,"idle":22672140,"irq":0}}]
+
+ <---  CPUs Info - end --->
+ <--- Test benchmark of filter - begin ---> 
+
+"filter password recursion:false" x 183,285 ops/sec ±1.90% (89 runs sampled)
+Fastest is "filter password recursion:false"
+
+ <---  Test benchmark of filter - end ---> 
+ <--- Test benchmark of request filter - begin ---> 
+
+"request filter defer:true send:{"password":"123456","token":"abcdefghijklmn"}" x 229 ops/sec ±40.41% (73 runs sampled)
+"request filter defer:true send:{"password":{"original":"123456","change":"123456789"}}" x 331 ops/sec ±3.82% (74 runs sampled)
+"request filter:false defer:true send:{"password":"123456","token":"abcdefghijklmn"}" x 312 ops/sec ±5.97% (74 runs sampled)
+"request filter:false defer:true send:{"password":{"original":"123456","change":"123456789"}}" x 355 ops/sec ±2.34% (77 runs sampled)
+Fastest is "request filter:false defer:true send:{"password":{"original":"123456","change":"123456789"}}"
+
+ <---  Test benchmark of request filter - end ---> 
