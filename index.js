@@ -161,20 +161,22 @@ const accessLogger = (option) => {
         return;
       }
       const ctx = { req, res };
+      ctx.logged = false;
       /**
        * The process.hrtime() method returns the current high-resolution real time in a [seconds, nanoseconds] tuple Array,
        * where nanoseconds is the remaining part of the real time that can't be represented in second precision.
        * @see {@link https://nodejs.org/api/process.html#process_process_hrtime_time}
        */
-      const startedAt = process.hrtime(); // 获取高精度时间
+      const startedAt = process.hrtime(); // get hrtime
       const remoteIP = _.get(ctx, aco.remoteIP);
       const traceId = `${_.get(ctx, aco.traceId, _.get(option, 'generateTraceId', generateTraceId)())}-${traceKey}`;
       const method = _.get(ctx, aco.method, 'GET').toUpperCase();
+      const remoteAddr = remoteIP ? getIP(remoteIP) : '0.0.0.0'; // get remote address
       const log = {
         'trace-key': traceKey,
         method,
         params: Object.assign({}, _.get(ctx, aco.query, {}), _.get(ctx, aco.body, {})), // assign query and body params
-        'remote-addr': remoteIP ? getIP(remoteIP) : '0.0.0.0',
+        'remote-addr': remoteAddr,
         'requested-at': getNowFormat(),
         'requested-timestamp': _.now(),
         'trace-id': traceId,
@@ -186,14 +188,18 @@ const accessLogger = (option) => {
        * response callback function
        */
       const responseCallback = () => {
-        Object.assign(log, {
-          'responded-at': getNowFormat(),
-          'response-time': calcResponseTime(startedAt),
-          status: _.get(ctx, aco.statusCode, 200),
-        });
-        // call logger log record after filtering sensitive
-        logger.info(filteringSensitiveInfo(log, option.filter));
+        if(!ctx.logged){
+          ctx.logged = true;
+          Object.assign(log, {
+            'responded-at': getNowFormat(),
+            'response-time': calcResponseTime(startedAt),
+            status: _.get(ctx, aco.statusCode, 200),
+          });
+          // call logger log record after filtering sensitive
+          logger.info(filteringSensitiveInfo(log, option.filter));
+        }
       };
+      ctx.remoteAddr = remoteAddr; // add remote address to context
       // add once linstener for response
       ctx.res.once('finish', responseCallback);
       ctx.res.once('close', responseCallback);

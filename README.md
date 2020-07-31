@@ -2,25 +2,27 @@
 
 A logger compoment for Baiji
 
-# Menu
+## 1. Menu
 
 <!-- TOC depthFrom:2 -->
 
-- [1. Installation](#1-installation)
-- [2. Usage](#2-usage)
-- [3. Description](#3-description)
-    - [3.1. classify & rotate](#31-classify--rotate)
-- [4. Options](#4-options)
-    - [4.1. Detail Case](#41-detail-case)
-- [5. TODO list](#5-todo-list)
-- [6. Contribution Step](#6-contribution-step)
-- [7. Run Tests](#7-run-tests)
-    - [7.1. Unit Test](#71-unit-test)
-    - [7.2. Benchmark Test](#72-benchmark-test)
+- [1. Menu](#1-menu)
+- [2. Installation](#2-installation)
+- [3. Usage](#3-usage)
+- [4. Description](#4-description)
+  - [4.1. classify & rotate](#41-classify--rotate)
+- [5. Options](#5-options)
+  - [5.1. Detail Case](#51-detail-case)
+- [6. TODO list](#6-todo-list)
+  - [6.1. Features](#61-features)
+- [7. Contribution Step](#7-contribution-step)
+- [8. Run Tests](#8-run-tests)
+  - [8.1. Unit Test](#81-unit-test)
+  - [8.2. Benchmark Test](#82-benchmark-test)
 
 <!-- /TOC -->
 
-## 1. Installation
+## 2. Installation
 
 `NodeJS version >= 8.12.0`
 
@@ -30,7 +32,7 @@ yarn add baiji-logger
 npm install baiji-logger -S
 ```
 
-## 2. Usage
+## 3. Usage
 
 > See details from [./test/app/index.js](./test/app/index.js)
 
@@ -55,11 +57,11 @@ app.use(accessLogger()); // Add accessLogger for routes
 app.listen(3000, () => infoLogger.info('Port : 3000'));
 ```
 
-## 3. Description
+## 4. Description
 
 > Based on [winstonjs/winston][]
 
-### 3.1. classify & rotate
+### 4.1. classify & rotate
 
 | classify | instance     | env      | transport          | rotate          |
 | -------- | ------------ | -------- | ------------------ | --------------- |
@@ -73,9 +75,11 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
 
 - warning/verbose/silly , not yet developed
 
-## 4. Options
+## 5. Options
 
 **Description**
+
+
 
 - | `option`          |
 - | `.filter`       | means `option.filter`
@@ -124,7 +128,7 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
 | `-level`             | string          | `debug`                                         | ↑                                                                             |
 | `-transports`        | array           | `[ transports.Console ]`                        | ↑                                                                             |
 
-### 4.1. Detail Case
+### 5.1. Detail Case
 
 - `option.filter.recursion`
   **not yet developed**.
@@ -133,11 +137,11 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
   **not yet developed**.
   only support String type.
   
-## 5. TODO list
+## 6. TODO list
 
-### 5.1. Features
+### 6.1. Features
 
-- [ ] Ensure number of log file handles < 5
+- [x] Ensure number of log file handles < 5
 - [ ] Developing `warning/silly/verbose` classify
 - [x] Concurrency test
 - [ ] Improve the efficiency and concurrency of the `filter` function
@@ -146,8 +150,12 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
 - [ ] Add `Kafka` transport config
 - [ ] Add `error email` config
 - [ ] Update `trace-id` of `req` , add the `key` of this app
+- [ ] Add pretty message & stack show in errorLogger
+- [ ] Add method for get the `trace-id` and the `trace-key`
+- [ ] Add params to context
+- [ ] Add config for logger response data
 
-## 6. Contribution Step
+## 7. Contribution Step
 
 ```shell
 fork https://github.com/baijijs/logger.git
@@ -162,7 +170,7 @@ git push
 pull request
 ```
 
-## 7. Run Tests
+## 8. Run Tests
 
 Install development environment module .
 
@@ -170,7 +178,7 @@ Install development environment module .
 yarn install -D
 ```
 
-### 7.1. Unit Test
+### 8.1. Unit Test
 
 All of the logger test cases are written with `Jest`. They can be run with `npm` or `yarn`.
 
@@ -180,7 +188,7 @@ npm test
 yarn test
 ```
 
-### 7.2. Benchmark Test
+### 8.2. Benchmark Test
 
 Benchmark report log out to `./docs/benchmark.report.log` .
 
