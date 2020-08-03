@@ -6,25 +6,26 @@ A logger compoment for Baiji
 
 <!-- TOC depthFrom:2 -->
 
-- [1. Menu](#1-menu)
-- [2. Installation](#2-installation)
-- [3. Usage](#3-usage)
-- [4. Description](#4-description)
-  - [4.1. classify & rotate](#41-classify--rotate)
-- [5. Options](#5-options)
-  - [5.1. Detail Case](#51-detail-case)
-- [6. TODO list](#6-todo-list)
-  - [6.1. Features](#61-features)
-- [7. Contribution Step](#7-contribution-step)
-- [8. Run Tests](#8-run-tests)
-  - [8.1. Unit Test](#81-unit-test)
-  - [8.2. Benchmark Test](#82-benchmark-test)
+- [baiji-logger](#baiji-logger)
+  - [1. Menu](#1-menu)
+  - [2. Installation](#2-installation)
+  - [3. Usage](#3-usage)
+  - [4. Description](#4-description)
+    - [4.1. classify & rotate](#41-classify--rotate)
+  - [5. Options](#5-options)
+    - [5.1. Detail Case](#51-detail-case)
+  - [6. TODO list](#6-todo-list)
+    - [6.1. Features](#61-features)
+  - [7. Contribution Step](#7-contribution-step)
+  - [8. Run Tests](#8-run-tests)
+    - [8.1. Unit Test](#81-unit-test)
+    - [8.2. Benchmark Test](#82-benchmark-test)
 
 <!-- /TOC -->
 
 ## 2. Installation
 
-`NodeJS version >= 8.12.0`
+`NodeJS version >= 10.14.2`
 
 ```shell
 yarn add baiji-logger
@@ -136,7 +137,7 @@ app.listen(3000, () => infoLogger.info('Port : 3000'));
 - `option.filter.replaceChat`
   **not yet developed**.
   only support String type.
-  
+
 ## 6. TODO list
 
 ### 6.1. Features
