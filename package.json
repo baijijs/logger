@@ -16,15 +16,19 @@
   },
   "description": "the Logger Module for Baiji",
   "devDependencies": {
-    "baiji": "^0.8.25",
+    "baiji": "^0.8.27",
     "benchmark": "^2.1.4",
     "cz-conventional-changelog": "^2.1.0",
-    "jest": "^23.6.0",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "jest": "^26.2.2",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
   },
   "homepage": "https://github.com/baijijs/logger#readme",
-  "keywords": ["baiji", "baiji-logger", "logger"],
+  "keywords": [
+    "baiji",
+    "baiji-logger",
+    "logger"
+  ],
   "main": "index.js",
   "name": "baiji-logger",
   "nodemonConfig": {
@@ -41,5 +45,9 @@
     "test": "jest",
     "benchmark": "node ./tests/benchmark/index.js"
   },
-  "version": "0.0.1-alpha.4"
+  "version": "0.0.1-alpha.5",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10.14.2"
+  }
 }
